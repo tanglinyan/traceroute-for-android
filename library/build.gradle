@@ -1,0 +1,91 @@
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'maven-publish'
+}
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+    }
+
+    buildTypes {
+        release {
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }
+    ndkVersion '25.1.8937393'
+    namespace = "ir.smartdevelopers.tracerout"
+}
+
+dependencies {
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+group = 'ir.smartdevelopers'
+version = '1.0.6'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'ir.smartdevelopers'
+            artifactId = 'traceroute'
+
+            afterEvaluate {
+                from components.release
+            }
+            pom {
+                name = 'traceroute-for-android'
+                description = 'traceroute-for-android'
+                url = 'https://github.com/smartdevelopers-ir/traceroute-for-android'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'smartdevelopers'
+                        name = 'mostafa babaei'
+                        email = 'info@smartdevelopers.ir'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/smartdevelopers-ir/traceroute-for-android.git'
+                    developerConnection = 'scm:git:ssh://github.com/smartdevelopers-ir/traceroute-for-android.git'
+                    url = 'http://github.com/smartdevelopers-ir/traceroute-for-android'
+                }
+
+            }
+            repositories {
+                maven {
+                    name = 'traceroute'
+                    url = "${project.buildDir}/repo"
+                }
+            }
+        }
+    }
+}
+
+
