@@ -1,4 +1,4 @@
-# traceroute-for-android 
+# traceroute-for-java-android
 Easy way to use traceroute on Android.
 
 ## Description
