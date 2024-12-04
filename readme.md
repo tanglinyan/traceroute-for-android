@@ -21,19 +21,29 @@ dependencies {
 
 synchronous way
 
-```kotlin
-val traceResult = TraceRoute.traceRoute("www.google.com")
+```java
+TraceRouteResult traceRouteResult = TraceRoute.getInstance().traceRoute("www.google.com");
 ```
 
 asynchronous way
 
-```kotlin
-TraceRoute.setCallback {
-    success { Log.d("tag", "\ntraceroute finish") }
-    update { text -> Log.d("tag", text) }
-    failed { code, reason -> Log.d("tag", """\ntraceroute failed.code:$code, reason:$reason""") }
-}
-TraceRoute.traceRoute("www.google.com", true)
+```java
+TraceRoute traceRoute = TraceRoute.getInstance();
+traceRoute.setCallback(new TraceRouteCallback() {
+    @Override
+    public void onSuccess(TraceRouteResult traceRouteResult) {
+        Log.d("TraceRoute", "\ntraceroute finish");
+
+    @Override
+    public void onUpdate(String text) {
+        Log.d("TraceRoute", text);
+
+    @Override
+    public void onFailed(int code, String reason) {
+        Log.d("TraceRoute", "\ntraceroute failed.code:" + code + ", reason:" + reason);
+    }
+});
+traceRoute.traceRoute("www.google.com", true);
 ```
 
 ## Proguard

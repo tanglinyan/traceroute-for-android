@@ -107,6 +107,17 @@ public class TraceRoute {
     }
 
     /**
+     * Perform traceroute with hostname.
+     *
+     * @param hostname The hostname for traceroute
+     * @return TraceRouteResult
+     */
+    public synchronized TraceRouteResult traceRoute(String hostname) {
+        String[] args = {"traceroute", hostname};
+        return traceRoute(args);
+    }
+
+    /**
      * Perform traceroute with command arguments.
      *
      * @param args The command arguments
