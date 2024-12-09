@@ -20,8 +20,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keepclassmembers com.wandroid.traceroute.TraceRoute {
+-keepclassmembers class com.wandroid.traceroute.TraceRoute {
     void clearResult();
-    void appendResult(***);
-    int execute(***);
+    void appendResult(java.lang.String);
+    int execute(java.lang.String[]);
 }

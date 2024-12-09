@@ -49,10 +49,10 @@ traceRoute.traceRoute("www.google.com", true);
 ## Proguard
 
 ```proguard
--keepclassmembers com.wandroid.traceroute.TraceRoute {
+-keepclassmembers class com.wandroid.traceroute.TraceRoute {
     void clearResult();
-    void appendResult(***);
-    int execute(***);
+    void appendResult(java.lang.String);
+    int execute(java.lang.String[]);
 }
 ```
 
